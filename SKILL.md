@@ -45,7 +45,7 @@ Create portraits of A11BERICH with identity fidelity taking priority over style.
 
 ## Output and versions
 
-- Support avatar/square (`1:1`), vertical social (`4:5` or `9:16`), and horizontal key visual (`16:9`) outputs. Compose for the requested use rather than merely cropping one master pose.
+- Support avatar/square (`1:1`), standard vertical portrait (`3:4`), and horizontal key visual (`16:9`) outputs. A11BERICH vertical portraits must be composed natively at `3:4`; do not use `9:16` or stretch/crop a `9:16` result into `3:4`. Compose for the requested use rather than merely cropping one master pose.
 - Save each accepted result as a new version; never overwrite a source truth or approved output. Prefer `outputs/YYYY-MM-DD/<mode>-<crop>-vNN.<ext>`. Use `scripts/next_version.py` when the next number is uncertain.
 - Treat approved files as immutable. A new approval becomes a new file and a new manifest entry; it does not replace prior approvals.
 - Report the roles assigned to inputs, identity truths used, chosen glasses rule, invariant list for edits, and final saved path.

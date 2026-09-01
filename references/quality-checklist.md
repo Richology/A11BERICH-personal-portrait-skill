@@ -37,7 +37,7 @@ Reject or rebuild any image that fails a critical identity or anatomy check.
 - Unrequested text, UI chrome, watermarks, logos, people, and background elements from references are absent.
 - Requested text/logo is present only when authorized, spelled verbatim, and visually correct; otherwise omit it.
 - Lighting direction, reflections, shadows, eyewear reflections, and subject/background color temperature agree.
-- Output ratio and safe area suit avatar, vertical social, or horizontal key-visual use.
+- Output ratio and safe area suit avatar (`1:1`), vertical portrait/social (`3:4`), or horizontal key-visual (`16:9`) use; vertical output is natively `3:4`, never `9:16` or `4:5`.
 
 ## Edit stopping rule
 
