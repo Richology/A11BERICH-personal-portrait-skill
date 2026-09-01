@@ -34,3 +34,13 @@ PASS — the resolved behavior locks identity to real-photo truths, applies the 
 | Face/chin/hand/shoulder or relief/worm texture drifts | Stop patching; rebuild from real truths | PASS |
 | Produce three platform variants | Recompose 1:1, vertical, and 16:9 separately; vary pose/expression; save distinct versions | PASS |
 | User uploads conversation-only clothing and pose images | Load local truths with `view_image`, then include the smallest complete recent-image set; never mix tool input mechanisms | PASS |
+| User says “换脸” and wants the exact photo preserved | Mark the original as `edit-target`; use `identity-preserve`; change only identity-bearing head/face/hair; preserve clothing, body, pose, hands, scene, objects and lighting | PASS |
+
+## Real likeness regression: 2026-09-01 trendy street portrait
+
+- Target reference role: pose, wardrobe, street scene, natural light and 9:16 composition only; its person and embedded UI/text/signs/logos/plate are forbidden identity/content sources.
+- Failed AI result role: regression evidence only, never identity truth and never an edit base.
+- Observed drift: face became longer and narrower; cheeks more hollow; eyebrows thinner; eyes deeper-set; nose narrower; lips thinner; chin longer/more pointed; age/gauntness increased; hair became longer and swept; shoulders/head scale drifted toward the slimmer reference model.
+- Correct rebuild inputs: original target reference + `face-front-neutral-588.jpg` + `profile-speaking-596.jpg` + `full-body-600.jpg`; no approved AI style images and no failed AI result.
+- Correct operation: fresh generation from real truths, explicit negative identity constraints, side-by-side likeness QA, and a new non-destructive version.
+- Verified repaired output: `trendy-street-9x16-v02.png`, generated from the corrected input set and saved without overwriting V01.

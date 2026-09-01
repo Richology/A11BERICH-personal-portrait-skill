@@ -5,15 +5,18 @@ Reject or rebuild any image that fails a critical identity or anatomy check.
 ## Identity and face
 
 - Face matches real-photo truths, not an earlier AI image.
+- Face reads immediately as A11BERICH rather than a generic similar East Asian man; compare the output side by side with the selected real truth at the same approximate angle.
 - Eyebrow shape and spacing remain consistent.
 - Mouth, lips, teeth, and smile remain plausible and identity-consistent.
 - Chin and jawline are stable; no widening, shrinking, doubling, or carved edge.
+- Reject a longer/narrower midface, hollow cheeks, deep-set eyes, narrower nose, thinner lips, longer/pointed chin, or older/gaunter appearance than the real truth.
 - Short spiky black hair, hairline, and side length remain consistent.
 - Retouching is light; skin retains natural texture without wax, relief, worm-like patterns, repeated pores, or smeared facial hair.
 
 ## Body and anatomy
 
 - 180 cm / 75 kg lean-muscular proportions read naturally; head size, torso length, and limb length agree.
+- Full-body outputs retain believable athletic shoulder width and head scale; do not inherit a slimmer target model's body.
 - Shoulder line is continuous and anatomically plausible; no sloped, doubled, fused, or detached shoulder.
 - Arms match the real muscularity without inflation, asymmetry, or broken elbows.
 - Both hands are appropriate to the action; count fingers, inspect joints, nails, grip, and contact with props.
@@ -39,4 +42,3 @@ Reject or rebuild any image that fails a critical identity or anatomy check.
 ## Edit stopping rule
 
 If face, chin, hands, shoulders, or skin/clothing texture drifts, do not patch again. Return to the real identity truths and create a fresh generation. Never perform a second local edit on an AI-generated or already edited AI image.
-
