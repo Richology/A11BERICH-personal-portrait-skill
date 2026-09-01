@@ -1,111 +1,269 @@
 project: "A11BERICH-personal-portrait"
-identity_policy: "Only kind=real-photo may establish identity. kind=approved-ai may guide style or composition only."
+core_identity_version: "core-v1"
+angle_convention: "left/right describe the direction the subject's nose points in the image"
+identity_policy: "Only original real photos may be real_identity_truth. AI calibration outputs and approved AI styles never establish identity and never feed later generations."
+
+identity_versions:
+  - id: "core-v1"
+    status: "active"
+    basis: "Original A11BERICH real photos retained under assets/identity"
+    calibration_status: "legacy active profile; numeric owner scoring pending"
+    rollback_to: null
+    promotion_rule: "Require repeated cross-scene drift, matching real-photo evidence, owner approval, and a retained prior version."
+
+coverage:
+  front:
+    asset_ids: ["face-front-neutral-588", "face-smile-586"]
+    source_status: "covered"
+    owner_score: null
+    production_status: "pending_owner_score"
+  left45:
+    asset_ids: []
+    source_status: "missing"
+    owner_score: null
+    production_status: "not_stable"
+  right45:
+    asset_ids: []
+    source_status: "missing"
+    owner_score: null
+    production_status: "not_stable"
+  left90:
+    asset_ids: ["profile-speaking-596"]
+    source_status: "partial; approximately 70-80 degrees and speaking, not controlled 90 degrees"
+    owner_score: null
+    production_status: "not_stable"
+  right90:
+    asset_ids: []
+    source_status: "missing"
+    owner_score: null
+    production_status: "not_stable"
+  full_body:
+    asset_ids: ["full-body-front-595", "full-body-600"]
+    source_status: "covered for front and oblique proportions; side and controlled 45-degree full-body remain missing"
+    owner_score: null
+    production_status: "pending_owner_score"
+  pink_rose_glasses:
+    asset_ids: ["torso-accessories-590"]
+    source_status: "partial; front mid-distance screenshot is usable, but sharp front and both side details are missing"
+
 assets:
   - id: "face-smile-586"
     path: "assets/identity/face-smile-586.jpg"
     source: "个人 IP 形象照/供给 AI 参考生图素材/微信图片_20260831125512_586_35.jpg"
     kind: "real-photo"
+    primary_role: "identity_face"
     primary_roles: ["identity", "expression"]
+    angle: "front"
+    expression: "broad_smile"
+    glasses: "black_frame_clear_lens"
+    accessory_state: "glasses visible; other accessories not reliable"
+    truth_level: "real_identity_truth"
     confidence: "high"
-    best_for: "near-face smiling identity, mouth, teeth, eyebrows, eyes, hair"
+    distortion_or_filter_notes: "Very close selfie perspective enlarges central features; do not use for face width, nose projection, or head geometry."
+    suitable_for: ["smiling mouth", "teeth", "eyes", "eyebrows", "front hair"]
     caution: "Ignore laptop stickers, text, objects, and background."
     sha256: "a6698e4f0bb4fb7883e898ecf0342f1b67fabfcc7a13909d881a41fd74be59e8"
+
   - id: "face-front-neutral-588"
     path: "assets/identity/face-front-neutral-588.jpg"
     source: "个人 IP 形象照/供给 AI 参考生图素材/微信图片_20260831125600_588_35.jpg"
     kind: "real-photo"
+    primary_role: "identity_face"
     primary_roles: ["identity", "expression"]
+    angle: "front"
+    expression: "neutral"
+    glasses: "black_frame_clear_lens"
+    accessory_state: "glasses visible; necklace and wrists outside useful crop"
+    truth_level: "real_identity_truth"
     confidence: "high"
-    best_for: "neutral front face, chin, jaw, face shape, clear-lens glasses"
+    distortion_or_filter_notes: "Screenshot UI and partial bystander present; slight head tilt, but facial geometry remains usable."
+    suitable_for: ["front face geometry", "chin", "jaw", "neutral mouth", "clear-lens glasses"]
     caution: "Ignore screenshot UI, location/date text, partial bystander, and background."
     sha256: "ad110d166b6741a539eda6ea76c49f8074a2c96d30b1ddf8c0968002189b7938"
+
   - id: "torso-accessories-590"
     path: "assets/identity/torso-accessories-590.jpg"
     source: "个人 IP 形象照/供给 AI 参考生图素材/微信图片_20260831125641_590_35.jpg; identical to temporary rose-glasses clipboard reference"
     kind: "real-photo"
+    primary_role: "accessory"
     primary_roles: ["identity", "accessory", "body"]
-    confidence: "high"
-    best_for: "rose lenses, necklace, bracelet, torso and arm scale"
-    caution: "Ignore screenshot UI, display text, certificate, gesture unless labeled, and background."
+    angle: "upper_body"
+    expression: "neutral"
+    glasses: "black_frame_pink_rose_lens"
+    accessory_state: "pink/rose glasses, necklace, and right-wrist bracelet visible; watch not visible"
+    truth_level: "real_identity_truth"
+    confidence: "medium"
+    distortion_or_filter_notes: "Mid-distance screenshot with UI and display light; accessory color/shape is usable, but not a close multi-angle eyewear study."
+    suitable_for: ["pink/rose lenses", "necklace", "right-wrist bracelet", "torso and arm scale"]
+    caution: "Ignore screenshot UI, display text, certificate, gesture, and background."
     sha256: "237024c906b27523773f42023dcb83dc064773902532795d265a8cc180865466"
+
   - id: "upper-body-event-591"
     path: "assets/identity/upper-body-event-591.jpg"
     source: "个人 IP 形象照/供给 AI 参考生图素材/微信图片_20260831125707_591_35.jpg"
     kind: "real-photo"
+    primary_role: "identity_body"
     primary_roles: ["identity", "body"]
+    angle: "upper_body"
+    expression: "restrained_smile"
+    glasses: "black_frame_pink_rose_lens"
+    accessory_state: "pink/rose glasses and left-wrist watch visible; event badge present but excluded"
+    truth_level: "real_identity_truth"
     confidence: "medium"
-    best_for: "upper-body proportions, shoulder width, arms, event presence"
-    caution: "Not a primary close-face truth; ignore event signage, people, badge, and props."
+    distortion_or_filter_notes: "Face is small and event lighting is bright/uneven; useful for upper-body scale, not close facial geometry."
+    suitable_for: ["upper-body proportions", "shoulder width", "arms", "event presence"]
+    caution: "Ignore event signage, people, badge, and props."
     sha256: "acb21cfe063a2f26daed75e5a000baeedac5afc7763fcc5ec6a4a13b64848be0"
+
+  - id: "full-body-front-595"
+    path: "assets/identity/full-body-front-595.jpg"
+    source: "个人 IP 形象照/供给 AI 参考生图素材/微信图片_20260831130123_595_35.jpg"
+    kind: "real-photo"
+    primary_role: "identity_body"
+    primary_roles: ["identity", "body"]
+    angle: "full_body"
+    expression: "neutral"
+    glasses: "black_frame_clear_lens"
+    accessory_state: "clear-lens glasses and left-wrist watch visible; necklace and bracelet absent or unclear"
+    truth_level: "real_identity_truth"
+    confidence: "high"
+    distortion_or_filter_notes: "Front standing view with complete limbs; warm sunset light shifts skin color and a partial bystander appears at image-left."
+    suitable_for: ["front full-body proportions", "neutral head-to-body scale", "shoulder width", "true limb length"]
+    caution: "Ignore crop UI, bystander, waterfront scene, fishing gear, clothing, and warm color cast."
+    sha256: "378f9bee72dbfb03739e03407b026b0851a49851f2507eb679d3a98dee209d00"
+
   - id: "profile-speaking-596"
     path: "assets/identity/profile-speaking-596.jpg"
     source: "个人 IP 形象照/供给 AI 参考生图素材/微信图片_20260831130124_596_35.jpg"
     kind: "real-photo"
+    primary_role: "identity_face"
     primary_roles: ["identity", "pose"]
-    confidence: "high"
-    best_for: "side/three-quarter identity, speaking mouth, hair profile, microphone grip"
-    caution: "Ignore bystanders, laptop imagery, clothing, and room unless explicitly labeled."
+    angle: "left90"
+    expression: "speaking"
+    glasses: "black_frame_clear_lens"
+    accessory_state: "clear-lens glasses visible; other accessories not visible"
+    truth_level: "real_identity_truth"
+    confidence: "medium"
+    distortion_or_filter_notes: "Nose points image-left at roughly 70-80 degrees, not a controlled 90-degree profile; speaking mouth changes jaw/lip shape."
+    suitable_for: ["image-left near-profile", "hair side profile", "ear position", "speaking context"]
+    caution: "Do not use for image-right angles. Ignore bystanders, laptop imagery, clothing, and room unless labeled."
     sha256: "ab153e2901364299f50b4c7af87aba1855552b9b556b90f8dcc0d0fa1cbcec33"
+
   - id: "body-arms-598"
     path: "assets/identity/body-arms-598.jpg"
     source: "个人 IP 形象照/供给 AI 参考生图素材/微信图片_20260831130239_598_35.jpg"
     kind: "real-photo"
+    primary_role: "identity_body"
     primary_roles: ["identity", "body", "accessory"]
+    angle: "upper_body"
+    expression: "neutral"
+    glasses: "black_frame_clear_lens"
+    accessory_state: "clear-lens glasses and left-wrist watch visible; phone occludes lower face"
+    truth_level: "real_identity_truth"
     confidence: "high"
-    best_for: "lean-muscular torso, shoulders, arms, watch placement and scale"
-    caution: "Phone occludes the lower face; do not use mirror room as scene guidance."
+    distortion_or_filter_notes: "Mirror selfie; phone occludes mouth/chin and raised arm changes shoulder line."
+    suitable_for: ["lean-athletic torso", "shoulder width", "arm muscularity", "watch scale"]
+    caution: "Do not use as primary face truth or use the mirror room as scene guidance."
     sha256: "79dbecf71b8ef2e27ef5eaed89ccdcc3a9b993cc4a9a3ed7cd6a3694905449a2"
+
   - id: "full-body-600"
     path: "assets/identity/full-body-600.jpg"
     source: "个人 IP 形象照/供给 AI 参考生图素材/微信图片_20260831130312_600_35.jpg"
     kind: "real-photo"
+    primary_role: "identity_body"
     primary_roles: ["identity", "body", "pose"]
+    angle: "full_body"
+    expression: "restrained_smile"
+    glasses: "black_frame_clear_lens"
+    accessory_state: "clear-lens glasses and left-wrist watch visible; necklace/bracelet unclear"
+    truth_level: "real_identity_truth"
     confidence: "high"
-    best_for: "full-body height, limb and torso proportions, casual stance"
+    distortion_or_filter_notes: "Mirror capture with dynamic stance and raised leg; useful for overall proportions but not a neutral side/full-body calibration."
+    suitable_for: ["front/oblique full-body height", "limb and torso proportions", "head-to-body scale"]
     caution: "Ignore crop UI, mirror setting, bystander, phone, clothes, and pose unless labeled."
     sha256: "3250bac6244033645e4ac087676789fe13160c78b3de43dff9dc6912af12be09"
+
   - id: "teaching-context-585"
     path: "assets/identity/teaching-context-585.jpg"
     source: "个人 IP 形象照/上课照片/微信图片_20260831125447_585_35.jpg"
     kind: "real-photo"
+    primary_role: "scene_context"
     primary_roles: ["pose", "scene-context"]
+    angle: "upper_body"
+    expression: "speaking"
+    glasses: "black_frame_clear_lens"
+    accessory_state: "clear-lens glasses and left-wrist watch visible at distance"
+    truth_level: "real_context_reference"
     confidence: "medium"
-    best_for: "real training-room scale, teaching stance, clicker and speaking context"
-    caution: "Face is too distant for identity truth; never copy projected text or UI."
+    distortion_or_filter_notes: "Face is too distant for identity reconstruction; perspective is useful only for real teaching scale."
+    suitable_for: ["training-room scale", "teaching stance", "clicker", "speaking context"]
+    caution: "Never copy projected text, browser UI, people, or background unless explicitly labeled."
     sha256: "e51bc148a90625aa45d72458db37875bd15f89154748daf89be13b44f8bf1561"
+
   - id: "signature-watch"
     path: "assets/accessories/silver-square-watch-black-woven-band.jpg"
     source: "temporary clipboard reference codex-clipboard-7fb687f7-6ed8-4655-9807-6a55121d580c.jpg"
     kind: "real-photo"
+    primary_role: "accessory"
     primary_roles: ["accessory"]
+    angle: "upper_body"
+    expression: "neutral"
+    glasses: "black_frame_pink_rose_lens"
+    accessory_state: "silver square watch with black woven band clearly visible"
+    truth_level: "real_accessory_truth"
     confidence: "high"
-    best_for: "silver square watch body and black woven/braided band"
-    caution: "Accessory reference only; do not inherit face, yellow clothing, pose, or background."
+    distortion_or_filter_notes: "Clean accessory detail; face, yellow clothing, pose, and background are outside its authorized role."
+    suitable_for: ["watch body shape", "silver finish", "black woven band", "left-wrist scale"]
+    caution: "Accessory reference only; never use its face as identity truth."
     sha256: "13db91b9516498040b19c2e29817040fc78099a1c6d645bfff86852c46d5cf0c"
+
   - id: "formal-core-approved"
     path: "assets/approved-styles/formal-core-portrait-approved.png"
     source: "wo-xia/outputs/01-formal-core-portrait-final.png"
     kind: "approved-ai"
+    primary_role: "style"
     primary_roles: ["style", "composition"]
-    confidence: "approved"
-    best_for: "formal business portrait, clear-lens frames, premium interior framing"
+    angle: "front"
+    expression: "neutral"
+    glasses: "black_frame_clear_lens"
+    accessory_state: "style depiction only; not accessory truth"
+    truth_level: "approved_style_reference"
+    confidence: "high"
+    distortion_or_filter_notes: "AI-generated approved output; never use for identity reconstruction or calibration input."
+    suitable_for: ["formal business style", "premium interior", "head-and-shoulders composition"]
     caution: "Never use as identity truth."
     sha256: "b62c98878d1f3875f5f9a69f5f40f501fcc1dc3b5de2e88b8161d3722ac4b867"
+
   - id: "rembrandt-v5-approved"
     path: "assets/approved-styles/rembrandt-v5-clean-rebuild-approved.png"
     source: "wo-xia/outputs/09-rembrandt-light-personal-portrait-v5-clean-rebuild.png"
     kind: "approved-ai"
+    primary_role: "style"
     primary_roles: ["style", "lighting", "composition"]
-    confidence: "approved"
-    best_for: "warm Rembrandt lighting, black T-shirt, rose lenses, hands-on-hips frame"
-    caution: "Never use as identity truth; preserve V5 as an independent approved style."
+    angle: "upper_body"
+    expression: "neutral"
+    glasses: "black_frame_pink_rose_lens"
+    accessory_state: "style depiction only; not accessory truth"
+    truth_level: "approved_style_reference"
+    confidence: "high"
+    distortion_or_filter_notes: "AI-generated approved output; never use for identity reconstruction or calibration input."
+    suitable_for: ["warm Rembrandt light", "black T-shirt", "hands-on-hips composition"]
+    caution: "Preserve V5 as an independent approved style; never use as identity truth."
     sha256: "797f8dd2e15232fee99620ada1b93dd438d7cdef29da56307c185b17b5b4886e"
+
   - id: "rembrandt-v6-approved"
     path: "assets/approved-styles/rembrandt-v6-white-tshirt-smile-approved.png"
     source: "wo-xia/outputs/09-rembrandt-light-personal-portrait-v6-white-tshirt-smile.png"
     kind: "approved-ai"
+    primary_role: "style"
     primary_roles: ["style", "lighting", "composition"]
-    confidence: "approved"
-    best_for: "warm Rembrandt lighting, white T-shirt, restrained smile, rose lenses"
-    caution: "Never use as identity truth; preserve V6 alongside V5."
+    angle: "upper_body"
+    expression: "restrained_smile"
+    glasses: "black_frame_pink_rose_lens"
+    accessory_state: "style depiction only; not accessory truth"
+    truth_level: "approved_style_reference"
+    confidence: "high"
+    distortion_or_filter_notes: "AI-generated approved output; never use for identity reconstruction or calibration input."
+    suitable_for: ["warm Rembrandt light", "white T-shirt", "restrained smile"]
+    caution: "Preserve V6 alongside V5; never use as identity truth."
     sha256: "6dd9334063566e64ad6fd60b50d72f3e49e509ed19c99019b3f9620155d4c85b"

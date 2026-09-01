@@ -4,6 +4,7 @@ Reject or rebuild any image that fails a critical identity or anatomy check.
 
 ## Identity and face
 
+- Selected truths match the requested direction and satisfy the minimum set in `identity-calibration.md`; opposite-side or AI calibration images are absent.
 - Face matches real-photo truths, not an earlier AI image.
 - Face reads immediately as A11BERICH rather than a generic similar East Asian man; compare the output side by side with the selected real truth at the same approximate angle.
 - Eyebrow shape and spacing remain consistent.
@@ -41,4 +42,6 @@ Reject or rebuild any image that fails a critical identity or anatomy check.
 
 ## Edit stopping rule
 
-If face, chin, hands, shoulders, or skin/clothing texture drifts, do not patch again. Return to the real identity truths and create a fresh generation. Never perform a second local edit on an AI-generated or already edited AI image.
+If face, chin, hair, shoulders, body proportions, or skin/clothing identity drifts, do not patch it. Return to the real identity truths and create a fresh generation. A single isolated finger, button, seam, or fabric defect may receive the one allowed local repaint from an otherwise accepted, unedited AI image; if it persists, rebuild. Never perform a second local edit on an AI-generated or already edited AI image.
+
+Treat an isolated finger, button, seam, or fabric defect as a one-off local-rendering issue, not a permanent identity trait. Escalate a core identity update only when the same facial/body drift recurs across different scenes and is supported by matching real photos.

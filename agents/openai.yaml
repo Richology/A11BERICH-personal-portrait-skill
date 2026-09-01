@@ -1,6 +1,6 @@
 interface:
   display_name: "A11BERICH-personal-portrait"
-  short_description: "锁定 A11BERICH 身份的个人宣传照生成与局部编辑"
-  default_prompt: "Use $a11berich-personal-portrait to generate an A11BERICH portrait from my labeled clothing, pose, scene, or lighting references while preserving identity and signature accessories; use native 3:4 for every vertical portrait."
+  short_description: "A11BERICH 身份建档、校准与个人宣传照生成"
+  default_prompt: "Use $a11berich-personal-portrait to audit or generate my portrait from angle-matched real identity photos, keeping accessories separate from identity and using native 3:4 for vertical output."
 policy:
   allow_implicit_invocation: true

@@ -8,7 +8,7 @@
 
 - Image 1 primary role: `clothing`. Use only its garment silhouette, construction, material, color, and explicitly requested marks; ignore its person, face, body, pose, text, UI, scene, and light.
 - Image 2 primary role: `pose`. Use only its body action/gesture; ignore its person, face, hair, body proportions, clothes, text, UI, scene, and light.
-- Identity sources: rebuild A11BERICH from real photos, starting with `face-smile-586.jpg` plus `face-front-neutral-588.jpg`; add `body-arms-598.jpg` and `full-body-600.jpg` for the visible body, and `profile-speaking-596.jpg` if the supplied action turns side-on.
+- Identity sources: rebuild A11BERICH from the smallest matching set of real photos. Use `face-front-neutral-588.jpg` for a neutral front action or `face-smile-586.jpg` when the requested expression smiles; add one matching body truth for visible body proportions. Use `profile-speaking-596.jpg` only when the nose points image-left near its documented 70–80° direction; for the opposite or uncovered direction, report the missing real-photo angle instead of substituting it.
 - Scene/mode: `企业培训 / 演讲`, with a credible business-training environment and an action adapted to speaking or instructing.
 - Eyewear: black frames with transparent clear lenses because this is a business-training mode; an explicit user lens request would override this.
 - Accessories: preserve the signature necklace and right-wrist bracelet when clothing/crop allow; preserve the left-wrist silver square watch with black woven band when visible.
@@ -35,6 +35,14 @@ PASS — the resolved behavior locks identity to real-photo truths, applies the 
 | Produce three platform variants | Recompose 1:1, native 3:4 vertical, and 16:9 separately; vary pose/expression; save distinct versions | PASS |
 | User uploads conversation-only clothing and pose images | Load local truths with `view_image`, then include the smallest complete recent-image set; never mix tool input mechanisms | PASS |
 | User says “换脸” and wants the exact photo preserved | Mark the original as `edit-target`; use `identity-preserve`; change only identity-bearing head/face/hair; preserve clothing, body, pose, hands, scene, objects and lighting | PASS |
+| “审计我上传的真人素材并指出缺口” | Route to `identity-onboarding.md`; inspect and classify without generating; reject or downgrade filtered, obstructed, distorted, inconsistent, or AI material | PASS |
+| “生成右侧脸校准照” while right90 is missing | Select same-direction right90 only; report missing coverage and request a sharp real photo instead of using `profile-speaking-596.jpg` or letting AI guess | PASS |
+| An AI calibration output is added | Store only as `ai_calibration_output`; never promote automatically, use as identity truth, or feed into a later calibration | PASS |
+| One output has a malformed finger or wrong button | Permit at most one local repaint with invariants; do not update core identity | PASS |
+| Pointed chin repeats across different scenes | Diagnose against matching real photos; repeated supported evidence may propose a traceable core-version update with owner approval | PASS |
+| A never-seen target reference is supplied | Assign only clothing/pose/scene/lighting/composition roles; exclude its person, identity, UI, text, logo, signs, plates, and bystanders | PASS |
+| A vertical blind test is requested | Generate natively at 3:4; never use 9:16 or 4:5 | PASS |
+| Business versus casual eyewear | Business/training keeps black clear-lens frames; casual/creator/sporty/trendy keeps pink/rose lenses unless explicitly overridden | PASS |
 
 ## Real likeness regression: 2026-09-01 trendy street portrait
 
